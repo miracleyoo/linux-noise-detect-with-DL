@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader
 __all__ = ['gen_dataset', 'load_data', 'folder_init', 'Timer']
 
 
-def gen_dataset(data_loader, opt, if_all, data_root='./Datasets/ts_all_padded.pkl'):
+def gen_dataset(data_loader, opt, if_all, data_root='./Datasets/train_pairs_50.pkl'):
     train_pairs, test_pairs = load_data(opt, data_root)
 
     test_dataset = data_loader(test_pairs, opt)
@@ -25,7 +25,9 @@ def gen_dataset(data_loader, opt, if_all, data_root='./Datasets/ts_all_padded.pk
         all_loader = DataLoader(dataset=all_dataset, batch_size=opt.TEST_BATCH_SIZE, shuffle=True,
                                 num_workers=opt.NUM_WORKERS, drop_last=False)
         opt.NUM_TRAIN = len(all_dataset)
-        return opt, all_loader, test_loader
+        if opt.MASS_TESTING:
+            opt.NUM_TEST = len(all_dataset)
+        return all_loader, test_loader
     else:
         train_dataset = data_loader(train_pairs, opt)
         train_loader = DataLoader(dataset=train_dataset, batch_size=opt.BATCH_SIZE, shuffle=True,
@@ -34,13 +36,14 @@ def gen_dataset(data_loader, opt, if_all, data_root='./Datasets/ts_all_padded.pk
         return train_loader, test_loader
 
 
-def load_data(opt, root='./Datasets/ts_all_padded.pkl'):
+def load_data(opt, data_root):
     start = time.time()
-    all_data = pickle.load(open(root, 'rb+'))
+    all_pairs = pickle.load(open(data_root, 'rb+'))
     print("==> Load data successfully, time elapsed: %.4f" % (time.time() - start))
-    length = len(all_data)
-    opt.NUM_CLASSES = len(set(all_data[:, 0]))
-    all_pairs = [(i[1:], int(i[1])) for i in all_data]
+    length = len(all_pairs)
+    opt.NUM_CLASSES = len(set(np.array(all_pairs)[:, 1]))
+    opt.PAIR_LENGTH = len(all_pairs[0][0][0])
+    # all_pairs = [(i[1:], int(i[0])) for i in all_data]
     sep_point = int(np.floor(opt.TRAIN_DATA_RATIO*length))
     train_pairs = all_pairs[:sep_point]
     test_pairs = all_pairs[sep_point:]

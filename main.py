@@ -6,7 +6,7 @@ from utils import *
 from data_loader import *
 from train import *
 from config import Config
-from models import miracle_net
+from models import miracle_net, miracle_thin_net
 from tensorboardX import SummaryWriter
 import argparse
 import torch
@@ -22,10 +22,19 @@ def main():
     pre_epoch = 0
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
+    # Load data
+    if opt.TRAIN_ALL or opt.MASS_TESTING:
+        all_loader, test_loader = gen_dataset(Template, opt, True)
+    else:
+        train_loader, test_loader = gen_dataset(Template, opt, False)
+    print("==> All datasets are generated successfully.")
+
     # Initialize model chosen
     try:
         if opt.MODEL == 'MiracleNet':
             net = miracle_net.MiracleNet(opt)
+        elif opt.MODEL == 'MiracleThinNet':
+            net = miracle_thin_net.MiracleThinNet(opt)
     except KeyError('Your model is not found.'):
         exit(0)
     finally:
@@ -38,18 +47,11 @@ def main():
 
     # Instantiation of tensorboard and add net graph to it
     writer = SummaryWriter(opt.SUMMARY_PATH)
-    dummy_input = torch.rand(opt.BATCH_SIZE, opt.NUM_CHANNEL, opt.LENGTH)
+    dummy_input = torch.rand(opt.BATCH_SIZE, opt.NUM_CHANNEL, opt.PAIR_LENGTH)
     try:
         writer.add_graph(net, dummy_input)
     except KeyError:
         writer.add_graph(net.module, dummy_input)
-
-    # Load data
-    if opt.TRAIN_ALL or opt.MASS_TESTING:
-        all_loader, test_loader = gen_dataset(Template, opt, True)
-    else:
-        train_loader, test_loader = gen_dataset(Template, opt, False)
-    print("==> All datasets are generated successfully.")
 
     # Start training or testing
     if opt.MASS_TESTING:

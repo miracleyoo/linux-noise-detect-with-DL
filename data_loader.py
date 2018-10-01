@@ -18,4 +18,4 @@ class Template(Dataset):
 
     def __getitem__(self, index):
         inputs, label = self.data[index]
-        return torch.from_numpy(inputs).float().unsqueeze(dim=0), np.float32(label)
+        return torch.from_numpy(inputs).float(), np.float32(label)

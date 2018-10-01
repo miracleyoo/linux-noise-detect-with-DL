@@ -1,0 +1,141 @@
+digraph {
+	graph [size="17.25,17.25"]
+	node [align=left fontsize=12 height=0.2 ranksep=0.1 shape=box style=filled]
+		4532218232 [label=ThAddmmBackward]
+			4532218288 -> 4532218232
+		4532218288 [label=ExpandBackward]
+			4532218456 -> 4532218288
+		4532218456 [label="
+ (3)" fillcolor=lightblue]
+			4531994016 -> 4532218232
+		4531994016 [label=DropoutBackward]
+			4532218512 -> 4531994016
+		4532218512 [label=LeakyReluBackward0]
+			4532218568 -> 4532218512
+		4532218568 [label=ThnnBatchNormBackward]
+			4532218736 -> 4532218568
+		4532218736 [label=ThAddmmBackward]
+			4532218960 -> 4532218736
+		4532218960 [label=ExpandBackward]
+			4532219184 -> 4532218960
+		4532219184 [label="
+ (1024)" fillcolor=lightblue]
+			4532219016 -> 4532218736
+		4532219016 [label=ViewBackward]
+			4532219240 -> 4532219016
+		4532219240 [label=SqueezeBackward1]
+			4532219352 -> 4532219240
+		4532219352 [label=MaxPool2DWithIndicesBackward]
+			4532219464 -> 4532219352
+		4532219464 [label=UnsqueezeBackward0]
+			4532219576 -> 4532219464
+		4532219576 [label=LeakyReluBackward0]
+			4532219688 -> 4532219576
+		4532219688 [label=ThnnBatchNormBackward]
+			4532219800 -> 4532219688
+		4532219800 [label=SqueezeBackward1]
+			4532277432 -> 4532219800
+		4532277432 [label=ThnnConv2DBackward]
+			4532277600 -> 4532277432
+		4532277600 [label=UnsqueezeBackward0]
+			4532277824 -> 4532277600
+		4532277824 [label=LeakyReluBackward0]
+			4532277992 -> 4532277824
+		4532277992 [label=ThnnBatchNormBackward]
+			4532278160 -> 4532277992
+		4532278160 [label=SqueezeBackward1]
+			4532278384 -> 4532278160
+		4532278384 [label=ThnnConv2DBackward]
+			4532278552 -> 4532278384
+		4532278552 [label=UnsqueezeBackward0]
+			4532278776 -> 4532278552
+		4532278776 [label=LeakyReluBackward0]
+			4532278944 -> 4532278776
+		4532278944 [label=ThnnBatchNormBackward]
+			4532279112 -> 4532278944
+		4532279112 [label=SqueezeBackward1]
+			4532279336 -> 4532279112
+		4532279336 [label=ThnnConv2DBackward]
+			4532279504 -> 4532279336
+		4532279504 [label=UnsqueezeBackward0]
+			4532279728 -> 4532279504
+		4532279728 [label=LeakyReluBackward0]
+			4532279896 -> 4532279728
+		4532279896 [label=ThnnBatchNormBackward]
+			4532280064 -> 4532279896
+		4532280064 [label=SqueezeBackward1]
+			4532280288 -> 4532280064
+		4532280288 [label=ThnnConv2DBackward]
+			4532280456 -> 4532280288
+		4532280456 [label=UnsqueezeBackward0]
+			4532280624 -> 4532280456
+		4532280624 [label="
+ (128, 1, 16)" fillcolor=lightblue]
+			4532280512 -> 4532280288
+		4532280512 [label="
+ (128)" fillcolor=lightblue]
+			4532280120 -> 4532279896
+		4532280120 [label="
+ (128)" fillcolor=lightblue]
+			4532280176 -> 4532279896
+		4532280176 [label="
+ (128)" fillcolor=lightblue]
+			4532279560 -> 4532279336
+		4532279560 [label=UnsqueezeBackward0]
+			4532279784 -> 4532279560
+		4532279784 [label="
+ (128, 128, 16)" fillcolor=lightblue]
+			4532279616 -> 4532279336
+		4532279616 [label="
+ (128)" fillcolor=lightblue]
+			4532279168 -> 4532278944
+		4532279168 [label="
+ (128)" fillcolor=lightblue]
+			4532279224 -> 4532278944
+		4532279224 [label="
+ (128)" fillcolor=lightblue]
+			4532278608 -> 4532278384
+		4532278608 [label=UnsqueezeBackward0]
+			4532278832 -> 4532278608
+		4532278832 [label="
+ (256, 128, 16)" fillcolor=lightblue]
+			4532278664 -> 4532278384
+		4532278664 [label="
+ (256)" fillcolor=lightblue]
+			4532278216 -> 4532277992
+		4532278216 [label="
+ (256)" fillcolor=lightblue]
+			4532278272 -> 4532277992
+		4532278272 [label="
+ (256)" fillcolor=lightblue]
+			4532277656 -> 4532277432
+		4532277656 [label=UnsqueezeBackward0]
+			4532277880 -> 4532277656
+		4532277880 [label="
+ (512, 256, 16)" fillcolor=lightblue]
+			4532277712 -> 4532277432
+		4532277712 [label="
+ (512)" fillcolor=lightblue]
+			4532219856 -> 4532219688
+		4532219856 [label="
+ (512)" fillcolor=lightblue]
+			4532277320 -> 4532219688
+		4532277320 [label="
+ (512)" fillcolor=lightblue]
+			4532219072 -> 4532218736
+		4532219072 [label=TBackward]
+			4532219296 -> 4532219072
+		4532219296 [label="
+ (1024, 5120)" fillcolor=lightblue]
+			4532218792 -> 4532218568
+		4532218792 [label="
+ (1024)" fillcolor=lightblue]
+			4532218848 -> 4532218568
+		4532218848 [label="
+ (1024)" fillcolor=lightblue]
+			4532218344 -> 4532218232
+		4532218344 [label=TBackward]
+			4532218624 -> 4532218344
+		4532218624 [label="
+ (3, 1024)" fillcolor=lightblue]
+}

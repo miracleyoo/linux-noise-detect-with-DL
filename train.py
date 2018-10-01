@@ -64,17 +64,22 @@ def testing(opt, test_loader, net, device):
     net.eval()
     test_loss = 0
     test_acc = 0
+    accs = [0] * 4
     for i, data in tqdm(enumerate(test_loader), desc="Testing", total=len(test_loader), leave=False, unit='b'):
         inputs, labels, *_ = data
         inputs, labels = inputs.to(device), labels.to(device)
 
         # Compute the outputs and judge correct
         outputs = net(inputs)
-        loss = opt.CRITERION(outputs, labels)
+        loss = opt.CRITERION(outputs, labels.long())
         test_loss += loss.item()
 
         predicts = outputs.sort(descending=True)[1][:, :opt.TOP_NUM]
         for predict, label in zip(predicts.tolist(), labels.cpu().tolist()):
             if label in predict:
+                accs[int(label)] += 1
                 test_acc += 1
+            # else:
+            #     print(predict, label)
+    print(accs)
     return test_loss / opt.NUM_TEST, test_acc / opt.NUM_TEST

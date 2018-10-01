@@ -10,7 +10,7 @@ from config import Config
 
 opt = Config()
 
-x = Variable(torch.randn(128, 2, 41, 9))  # change 12 to the channel number of network input
+x = Variable(torch.randn(256, 1, 40960))  # change 12 to the channel number of network input
 model = miracle_net.MiracleNet(opt)
 y = model(x)
 g = make_dot(y)
