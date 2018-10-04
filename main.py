@@ -47,7 +47,7 @@ def main():
 
     # Instantiation of tensorboard and add net graph to it
     writer = SummaryWriter(opt.SUMMARY_PATH)
-    dummy_input = torch.rand(opt.BATCH_SIZE, opt.NUM_CHANNEL, opt.PAIR_LENGTH)
+    dummy_input = torch.rand(opt.BATCH_SIZE, opt.NUM_CHANNEL, opt.PAIR_LENGTH).to(device)
     try:
         writer.add_graph(net, dummy_input)
     except KeyError:
