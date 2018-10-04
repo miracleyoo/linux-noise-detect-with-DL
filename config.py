@@ -18,7 +18,7 @@ class Config(object):
         self.SAVE_EVERY          = 1
 
         # Tensor shape definition
-        self.BATCH_SIZE          = 256
+        self.BATCH_SIZE          = 2
         self.TEST_BATCH_SIZE     = 256
         self.NUM_CHANNEL         = 2
         self.LENGTH              = 40960
@@ -41,7 +41,8 @@ class Config(object):
         # Name and path definition
         self.NET_SAVE_PATH       = "./source/trained_net/"
         self.MODEL               = 'MiracleThinNet'
-        self.PROCESS_ID          = 'FULL_2166_DATA_CUTLEN_50'
+        self.PROCESS_ID          = 'FULL_2166_DATA_CUTLEN_%d_BATCH_2' % self.PAIR_LENGTH
+        self.DATA_ROOT           = './Datasets/train_pairs_%d.pkl' % self.PAIR_LENGTH
         if self.TRAIN_ALL:
             self.PROCESS_ID += '_TRAIN_ALL'
         self.SUMMARY_PATH        = "./source/summary/"+self.MODEL+'_'+self.PROCESS_ID

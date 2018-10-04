@@ -10,8 +10,8 @@ from torch.utils.data import DataLoader
 __all__ = ['gen_dataset', 'load_data', 'folder_init', 'Timer']
 
 
-def gen_dataset(data_loader, opt, if_all, data_root='./Datasets/train_pairs_50.pkl'):
-    train_pairs, test_pairs = load_data(opt, data_root)
+def gen_dataset(data_loader, opt, if_all):
+    train_pairs, test_pairs = load_data(opt, opt.DATA_ROOT)
 
     test_dataset = data_loader(test_pairs, opt)
     test_loader = DataLoader(dataset=test_dataset, batch_size=opt.TEST_BATCH_SIZE, shuffle=False,
